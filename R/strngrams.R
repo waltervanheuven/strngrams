@@ -326,7 +326,7 @@ anagrams <- function(the_str) {
 #'
 #' @description `sbf_rank` returns the summed Bigram Frequency (SBF) Rank
 #'
-#' @details Based on definition found of Novick & Sherman (2004)
+#' @details Based on definition found of Novick & Sherman (2004) \url{https://link.springer.com/article/10.3758/BF03195587}
 #'
 #' @param the_str letter string
 #' @param bigram_table bigram table
@@ -426,7 +426,7 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
 #'
 #' @description `gtzero` Returns the number of bigrams in the_str that exist in the bigram_table.
 #'
-#' @details Based on definition in Mendelsohn (1976)
+#' @details Based on definition in Mendelsohn (1976), \url{https://link.springer.com/article/10.3758/BF03213228}
 #'
 #' @param the_str the string
 #' @param bigram_table bigram table

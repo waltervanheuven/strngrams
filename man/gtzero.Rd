@@ -18,5 +18,5 @@ list of bigrams
 `gtzero` Returns the number of bigrams in the_str that exist in the bigram_table.
 }
 \details{
-Based on definition in Mendelsohn (1976)
+Based on definition in Mendelsohn (1976), \url{https://link.springer.com/article/10.3758/BF03213228}
 }
