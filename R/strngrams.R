@@ -4,7 +4,6 @@
 #
 # Set of functions to calculate anagrams, bigrams, and trigrams from letter strings
 
-
 #' Bigrams of a string
 #'
 #' Returns bigrams from a string. Either all possible bigrams are returned, or only adjacent bigrams
@@ -178,10 +177,10 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
 
   # aggregate to sum frequencies
   if (position_specific == TRUE) {
-    df2 <- aggregate(list(df$type_frequency, df$token_frequency), by = list(df$ngram,df$pos), FUN = sum)
+    df2 <- stats::aggregate(list(df$type_frequency, df$token_frequency), by = list(df$ngram,df$pos), FUN = sum)
     colnames(df2) <- c(type, "pos", "type.frequency", "token.frequency")
   } else {
-    df2 <- aggregate(list(df$type_frequency,df$token_frequency),by=list(df$ngram),FUN=sum)
+    df2 <- stats::aggregate(list(df$type_frequency,df$token_frequency),by=list(df$ngram),FUN=sum)
     colnames(df2) <- c(type, "type.frequency", "token.frequency")
   }
 
@@ -333,7 +332,8 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
            }
 
            # summed bigram frequency of the_str
-           sbf_the_str <- str_summed_ngram(the_str, bigram_table, type = "bigram", frequency = "type")
+           #sbf_the_str <- str_summed_ngram(the_str, bigram_table, type = "bigram", frequency = "type")
+           sbf_str_str <- str_ngram_frequency(the_str, bigram_table, type = "bigram", frequency = "type")
 
            # data.frame with anagrams
            df <- data.frame(anagrams = the_anagrams, sbf = 0)
@@ -349,7 +349,7 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
            if (top12 == FALSE) {
              the_list <- rank_list
            } else {
-             the_list <- head(df, 12)
+             the_list <- utils::head(df, 12)
            }
          },
          "Gilhooly" = { # --------------- NOT YET WORKING PROPERLY ------------------
