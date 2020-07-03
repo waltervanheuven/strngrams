@@ -7,8 +7,9 @@
 ```R
 library(devtools)
 remotes::install_github("waltervanheuven/strngrams")
-```
 
+library(strngrams)
+```
 
 ## Usage
 
@@ -43,6 +44,24 @@ str_ngrams("DREAM")
 #[1] 1 1 1 1
 ```
 
+### Anagrams
+
+```
+anagrams("DREAM")
+
+#  [1] "DREAM" "DREMA" "DRMEA" "DMREA" "MDREA" "MDRAE" "DMRAE" "DRMAE" "DRAME" "DRAEM" "DAREM"
+# [12] "DARME" "DAMRE" "DMARE" "MDARE" "MADRE" "AMDRE" "ADMRE" "ADRME" "ADREM" "ADERM" "ADEMR"
+# [23] "ADMER" "AMDER" "MADER" "MDAER" "DMAER" "DAMER" "DAEMR" "DAERM" "DEARM" "DEAMR" "DEMAR"
+# [34] "DMEAR" "MDEAR" "MDERA" "DMERA" "DEMRA" "DERMA" "DERAM" "EDRAM" "EDRMA" "EDMRA" "EMDRA"
+# [45] "MEDRA" "MEDAR" "EMDAR" "EDMAR" "EDAMR" "EDARM" "EADRM" "EADMR" "EAMDR" "EMADR" "MEADR"
+# [56] "MAEDR" "AMEDR" "AEMDR" "AEDMR" "AEDRM" "AERDM" "AERMD" "AEMRD" "AMERD" "MAERD" "MEARD"
+# [67] "EMARD" "EAMRD" "EARMD" "EARDM" "ERADM" "ERAMD" "ERMAD" "EMRAD" "MERAD" "MERDA" "EMRDA"
+# [78] "ERMDA" "ERDMA" "ERDAM" "REDAM" "REDMA" "REMDA" "RMEDA" "MREDA" "MREAD" "RMEAD" "REMAD"
+# [89] "REAMD" "READM" "RAEDM" "RAEMD" "RAMED" "RMAED" "MRAED" "MARED" "AMRED" "ARMED" "AREMD"
+#[100] "AREDM" "ARDEM" "ARDME" "ARMDE" "AMRDE" "MARDE" "MRADE" "RMADE" "RAMDE" "RADME" "RADEM"
+#[111] "RDAEM" "RDAME" "RDMAE" "RMDAE" "MRDAE" "MRDEA" "RMDEA" "RDMEA" "RDEMA" "RDEAM"
+```
+
 ### Bigram frequencies of words in lexicon
 
 Example to calculate type and token frequencies of each word in a small lexicon
@@ -72,6 +91,18 @@ print(db)
 bigram_table <- str_calc_ngrams(db$word, db$frequency, type = "bigram", position_specific = TRUE)
 print(bigram_table)
 
+#   bigram pos type.frequency token.frequency
+#1      ba   1              3              18
+#2      bo   1              1               8
+#3      al   2              1               2
+#4      an   2              1              10
+#5      ao   2              1               6
+#6      ob   2              1               8
+#7      bo   3              1               8
+#8      ld   3              1               2
+#9      nk   3              1              10
+#10     op   3              1               6
+
 # calculate summed positional bigram frequencies and add those to db with words
 db$sum.bigram.freq.token <- str_ngram_info(db$word, bigram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed")
 
@@ -82,6 +113,12 @@ db$mean.bigram.freq.token <- str_ngram_info(db$word, bigram_table, type = "bigra
 
 # show lexicon with type and token bigram frequencies
 print(db)
+
+#  word frequency sum.bigram.freq.token mean.bigram.freq.token
+#1 bank        10                    38              12.666667
+#2 bobo         8                     8               2.666667
+#3 bald         2                    22               7.333333
+#4 baop         6                    30              10.000000
 
 # save to tab-delimited file
 write.table(db, col.names = T, row.names = F, file="tmp/db.txt", quote = FALSE, fileEncoding="UTF-8", sep="\t")
