@@ -46,9 +46,8 @@ str_ngrams("DREAM")
 
 ### Anagrams
 
-```
+```R
 anagrams("DREAM")
-
 #  [1] "DREAM" "DREMA" "DRMEA" "DMREA" "MDREA" "MDRAE" "DMRAE" "DRMAE" "DRAME" "DRAEM" "DAREM"
 # [12] "DARME" "DAMRE" "DMARE" "MDARE" "MADRE" "AMDRE" "ADMRE" "ADRME" "ADREM" "ADERM" "ADEMR"
 # [23] "ADMER" "AMDER" "MADER" "MDAER" "DMAER" "DAMER" "DAEMR" "DAERM" "DEARM" "DEAMR" "DEMAR"
