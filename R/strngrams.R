@@ -1,9 +1,8 @@
 #' strngrams
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
-
 
 #' @name str_bigrams
 #' @title str_bigrams
+#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 #'
 #' @description `str_bigrams` returns the bigrams of a string
 #'
@@ -87,6 +86,7 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 
 #' @name str_ngrams
 #' @title str_ngrams
+#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 #'
 #' @description `str_ngrams` returns monograms, bigrams, or trigrams of a string with frequency information
 #'
@@ -144,6 +144,7 @@ str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
 
 #' @name str_calc_ngrams
 #' @title str_calc_ngrams
+#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 #'
 #' @description `str_calc_ngrams` caclulates the ngrams of the strings in a list
 #'
@@ -191,6 +192,7 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
 
 #' @name str_ngram_frequency
 #' @title str_ngram_frequency
+#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 #'
 #' @description `str_ngram_frequency` caculates the ngram frequency of a string
 #'
@@ -267,6 +269,7 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
 
 #' @name str_ngram_info
 #' @title str_ngram_info
+#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 #'
 #' @description `str_ngram_info` returns ngram info for each word (summed frequency) in a list
 #'
@@ -300,6 +303,7 @@ str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_spe
 
 #' @name anagrams
 #' @title anagrams
+#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 #'
 #' @description `anagrams` returns all possible anagrams of the letter string
 #'
@@ -323,6 +327,7 @@ anagrams <- function(the_str) {
 
 #' @name sbf_rank
 #' @title sbf_rank
+#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 #'
 #' @description `sbf_rank` returns the summed Bigram Frequency (SBF) Rank
 #'
@@ -423,6 +428,7 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
 
 #' @name gtzero
 #' @title gtzero
+#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 #'
 #' @description `gtzero` Returns the number of bigrams in the_str that exist in the bigram_table.
 #'
