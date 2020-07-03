@@ -1,13 +1,12 @@
 # strngrams.R
 #
 #' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
-#
-# Set of functions to calculate anagrams, bigrams, and trigrams from letter strings
 
 #' @name str_bigrams
 #'
-#' Returns bigrams from a string. Either all possible bigrams are returned, or only adjacent bigrams
-#' or open bigrams.
+#' @description `str_bigrams` returns the bigrams of a string
+#'
+#' @details Either all possible bigrams or only adjacent bigrams or open bigrams are returned
 #'
 #' @param the_str a string
 #' @param type 'all', 'adjacent', 'open'
@@ -78,9 +77,10 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
   return(bigram_list)
 }
 
-#' str_ngrams returns monograms, bigrams, or trigrams of a string with frequency information
-#'
+
 #' @name str_ngrams
+#'
+#' @description `str_ngrams` returns monograms, bigrams, or trigrams of a string with frequency information
 #'
 #' @param the_str string of characters
 #' @param type monogram, bigram, or trigram
@@ -133,9 +133,9 @@ str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
   )
 }
 
-#' Caclulate ngrams based strings in a list
-#'
 #' @name str_calc_ngrams
+#'
+#' @description `str_calc_ngrams` caclulates the ngrams of the strings in a list
 #'
 #' @param word_list list of words
 #' @param frequency_list list of frequencies for each word
@@ -178,7 +178,9 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
 }
 
 
-#' Caculate ngram frequency of a string
+#' @name str_ngram_frequency
+#'
+#' @description `str_ngram_frequency` caculates the ngram frequency of a string
 #'
 #' @param the_str the character string
 #' @param ngram_table table with ngrams
@@ -250,7 +252,9 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
   return(f)
 }
 
-#' ngram info for each word (summed frequency) in a list
+#' @name str_ngram_info
+#'
+#' @description `str_ngram_info` returns ngram info for each word (summed frequency) in a list
 #'
 #' @param word_list list of words
 #' @param ngram_table ngram table
@@ -279,7 +283,9 @@ str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_spe
   return(f)
 }
 
-#' Create all possible anagrams of the letter string
+#' @name anagrams
+#'
+#' @description `anagrams` returns all possible anagrams of the letter string
 #'
 #' @param the_str string of letters
 #'
@@ -294,9 +300,11 @@ anagrams <- function(the_str) {
   return(the_list)
 }
 
-#' Summed Bigram Frequency (SBF) Rank
+#' @name sbf_rank
 #'
-#' Based on definition found in Novick & Sherman (2004)
+#' @description `sbf_rank` returns the summed Bigram Frequency (SBF) Rank
+#'
+#' @detail Based on definition found of Novick & Sherman (2004)
 #'
 #' @param the_Str the letter string
 #' @param bigram_table bigram table
@@ -390,15 +398,16 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
   return(return_df)
 }
 
-#' Count number of bigrams in the_str that exist in the bigram_table.
-#' Match on bigram and position
+#' @name gtzero
 #'
-#' Based on definition of Mendelsohn (1976)
+#' @description `gtzero` Returns the number of bigrams in the_str that exist in the bigram_table.
 #'
-#'@param the_str the string
-#'@param bigram_table bigram table
+#' @detail Based on definition in Mendelsohn (1976)
 #'
-#'@return list of bigrams
+#' @param the_str the string
+#' @param bigram_table bigram table
+#'
+#' @return list of bigrams
 #'
 gtzero <- function(the_str, bigram_table) {
   anagrams <- anagrams(the_str)
