@@ -1,11 +1,12 @@
-# strngram
+# strngrams
 
 [R](https://www.r-project.org) package with functions to extract ngrams (e.g., letters, bigrams, trigrams), create anagrams, and calculate summed/mean ngram type and token frequencies of letter strings.
 
 ## Installation
 
 ```R
-install.packages("")
+library(devtools)
+remotes::install_github("waltervanheuven/strngrams")
 ```
 
 
