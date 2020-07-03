@@ -4,30 +4,16 @@
 #
 # Set of functions to calculate anagrams, bigrams, and trigrams from letter strings
 
-#' Bigrams of a string
+#' @name str_bigrams
 #'
 #' Returns bigrams from a string. Either all possible bigrams are returned, or only adjacent bigrams
 #' or open bigrams.
 #'
-#' For example,
-#'
-#' DREAM
-#'
-#' all bigrams: [20] "DR" "DE" "DA" "DM" "RD" "RE" "RA" "RM" "ED" "ER" "EA" "EM" "AD" "AR" "AE" "AM" "MD" "MR" "ME" "MA"
-#' adjacent: [4] "DR" "RE" "EA" "AM"
-#' open: [10] "DR" "DE" "DA" "DM" "RE" "RA" "RM" "EA" "EM" "AM"
-#' open (max distance 2): [7] "DR" "DE" "RE" "RA" "EA" "EM" "AM"
-#'
 #' @param the_str a string
 #' @param type 'all', 'adjacent', 'open'
-#' @param max_distance distance between the letters of the open bigrams. -1: no restriction for the number of open bigrams
+#' @param max_distance distance between the letters of the open bigrams. -1 no restriction for the number of open bigrams
 #'
-#' @example bigrams("DREAM", "all")
-#' @example bigrams("DREAM", "adjacent")
-#' @example bigrams("DREAM", "open")
-#' @example bigrams("DREAM", "open", 2)
-#'
-#' @return vector of characters
+#' @return list of characters
 #'
 str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
   if (class(the_str) != 'character') {
@@ -94,6 +80,8 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 
 #' str_ngrams returns monograms, bigrams, or trigrams of a string with frequency information
 #'
+#' @name str_ngrams
+#'
 #' @param the_str string of characters
 #' @param type monogram, bigram, or trigram
 #' @param frequency frequency of the the_str
@@ -147,10 +135,12 @@ str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
 
 #' Caclulate ngrams based strings in a list
 #'
+#' @name str_calc_ngrams
+#'
 #' @param word_list list of words
 #' @param frequency_list list of frequencies for each word
-#' @type monogram, bigram, or trigram
-#' @position_specific TRUE or FALSE
+#' @param type monogram, bigram, or trigram
+#' @param position_specific TRUE or FALSE
 #'
 #' @return data.frame with a table of ngrams
 #'
@@ -262,8 +252,8 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
 
 #' ngram info for each word (summed frequency) in a list
 #'
-#' @param word_list
-#' @param ngram_table
+#' @param word_list list of words
+#' @param ngram_table ngram table
 #' @param type monogram, bigram, or trigram
 #' @param position_specific TRUE or FALSE
 #' @param frequency type or token
@@ -291,7 +281,7 @@ str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_spe
 
 #' Create all possible anagrams of the letter string
 #'
-#' @param the_str
+#' @param the_str string of letters
 #'
 #' @return vector of all possible anagrams
 #'
@@ -309,8 +299,9 @@ anagrams <- function(the_str) {
 #' Based on definition found in Novick & Sherman (2004)
 #'
 #' @param the_Str the letter string
-#' @param bigram_table
-#' @top12 TRUE or FALSE
+#' @param bigram_table bigram table
+#' @param top12 TRUE or FALSE
+#' @param method method to be used
 #'
 #' @return list with SBF, SBF rank, and anagrams with SBF >= SBF the_str
 #'
@@ -403,6 +394,11 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
 #' Match on bigram and position
 #'
 #' Based on definition of Mendelsohn (1976)
+#'
+#'@param the_str the string
+#'@param bigram_table bigram table
+#'
+#'@return list of bigrams
 #'
 gtzero <- function(the_str, bigram_table) {
   anagrams <- anagrams(the_str)
