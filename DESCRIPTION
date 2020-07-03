@@ -1,0 +1,10 @@
+Package: strngrams
+Type: Package
+Title: Extract string ngrams, create anagrams, and calculate type/token frequencies
+Version: 0.1.0
+Author: Walter van Heuven
+Maintainer: The package maintainer <walter.vanheuven@nottingham.ac.uk>
+Description: Package contains functions to extract ngrams (e.g., letters, bigrams, trigrams), create anagrams, and calculate summed/mean ngram type and token frequencies of letter strings.
+License: 
+Encoding: UTF-8
+LazyData: true

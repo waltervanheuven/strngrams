@@ -1,0 +1,5 @@
+word	frequency
+bank	10
+bobo	8
+bald  2
+baop	6
