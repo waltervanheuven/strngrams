@@ -30,3 +30,6 @@ summed ngram frequency
 \description{
 `str_ngram_frequency` caculates the ngram frequency of a string
 }
+\author{
+Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+}

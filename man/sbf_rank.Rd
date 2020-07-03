@@ -22,5 +22,11 @@ list with SBF, SBF rank, and anagrams with SBF >= SBF the_str
 `sbf_rank` returns the summed Bigram Frequency (SBF) Rank
 }
 \details{
-Based on definition found of Novick & Sherman (2004) \url{https://link.springer.com/article/10.3758/BF03195587}
+Based on definition found in Novick & Sherman (2004)
+}
+\references{
+\url{https://link.springer.com/article/10.3758/BF03195587}
+}
+\author{
+Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
 }

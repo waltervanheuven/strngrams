@@ -26,3 +26,6 @@ data.frame with a table of ngrams
 \description{
 `str_calc_ngrams` caclulates the ngrams of the strings in a list
 }
+\author{
+Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+}

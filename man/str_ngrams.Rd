@@ -19,3 +19,6 @@ list of ngram, position, type frequency, token frequency
 \description{
 `str_ngrams` returns monograms, bigrams, or trigrams of a string with frequency information
 }
+\author{
+Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+}

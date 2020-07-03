@@ -32,3 +32,6 @@ vector of frequencies
 \description{
 `str_ngram_info` returns ngram info for each word (summed frequency) in a list
 }
+\author{
+Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+}

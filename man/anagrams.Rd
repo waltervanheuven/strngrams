@@ -20,3 +20,6 @@ vector of all possible anagrams
 anagrams("DREAM")
 }
 }
+\author{
+Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+}
