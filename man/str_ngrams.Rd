@@ -7,11 +7,11 @@
 str_ngrams(the_str, type = "bigram", frequency = 1)
 }
 \arguments{
-\item{the_str}{string of characters}
+\item{the_str}{letter string}
 
 \item{type}{monogram, bigram, or trigram}
 
-\item{frequency}{frequency of the the_str}
+\item{frequency}{frequency of the letter string (word)}
 }
 \value{
 list of ngram, position, type frequency, token frequency
@@ -20,5 +20,5 @@ list of ngram, position, type frequency, token frequency
 `str_ngrams` returns monograms, bigrams, or trigrams of a string with frequency information
 }
 \author{
-Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+Walter van Heuven
 }

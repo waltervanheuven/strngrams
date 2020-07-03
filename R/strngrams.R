@@ -1,14 +1,16 @@
 #' strngrams
+#'
+#' Written by Walter van heuven, https://waltervanheuven.net
 
 #' @name str_bigrams
 #' @title str_bigrams
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
+#' @author Walter van Heuven
 #'
-#' @description `str_bigrams` returns the bigrams of a string
+#' @description `str_bigrams` returns the bigrams of a letter string
 #'
 #' @details Either all possible bigrams or only adjacent bigrams or open bigrams are returned
 #'
-#' @param the_str a string
+#' @param the_str letter string
 #' @param type 'all', 'adjacent', 'open'
 #' @param max_distance distance between the letters of the open bigrams. -1 no restriction for the number of open bigrams
 #'
@@ -86,13 +88,13 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 
 #' @name str_ngrams
 #' @title str_ngrams
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
+#' @author Walter van Heuven
 #'
 #' @description `str_ngrams` returns monograms, bigrams, or trigrams of a string with frequency information
 #'
-#' @param the_str string of characters
+#' @param the_str letter string
 #' @param type monogram, bigram, or trigram
-#' @param frequency frequency of the the_str
+#' @param frequency frequency of the letter string (word)
 #'
 #' @return list of ngram, position, type frequency, token frequency
 #'
@@ -144,14 +146,14 @@ str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
 
 #' @name str_calc_ngrams
 #' @title str_calc_ngrams
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
+#' @author Walter van Heuven
 #'
 #' @description `str_calc_ngrams` caclulates the ngrams of the strings in a list
 #'
 #' @param word_list list of words
-#' @param frequency_list list of frequencies for each word
+#' @param freq_list list of frequencies for each word
 #' @param type monogram, bigram, or trigram
-#' @param position_specific TRUE or FALSE
+#' @param position_specific ngram is position specific or not: TRUE or FALSE
 #'
 #' @return data.frame with a table of ngrams
 #'
@@ -192,13 +194,14 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
 
 #' @name str_ngram_frequency
 #' @title str_ngram_frequency
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
+#' @author Walter van Heuven
 #'
 #' @description `str_ngram_frequency` caculates the ngram frequency of a string
 #'
-#' @param the_str the character string
+#' @param the_str letter string
 #' @param ngram_table table with ngrams
-#' @param position_specific TRUE or FALSE
+#' @param type monogram, bigram, or trigram
+#' @param position_specific ngrams are position specific or not: TRUE or FALSE
 #' @param frequency type or token
 #' @param func summed
 #'
@@ -269,7 +272,7 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
 
 #' @name str_ngram_info
 #' @title str_ngram_info
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
+#' @author Walter van Heuven
 #'
 #' @description `str_ngram_info` returns ngram info for each word (summed frequency) in a list
 #'
@@ -278,7 +281,7 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
 #' @param type monogram, bigram, or trigram
 #' @param position_specific TRUE or FALSE
 #' @param frequency type or token
-#' @param func summed
+#' @param func summed (default) or mean frequency
 #'
 #' @return vector of frequencies
 #'
@@ -303,11 +306,11 @@ str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_spe
 
 #' @name anagrams
 #' @title anagrams
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
+#' @author Walter van Heuven
 #'
 #' @description `anagrams` returns all possible anagrams of the letter string
 #'
-#' @param the_str string of letters
+#' @param the_str letter string
 #'
 #' @return vector of all possible anagrams
 #'
@@ -322,16 +325,17 @@ anagrams <- function(the_str) {
   the_permutations <- combinat::permn(letters)
   the_list <- unlist(lapply(the_permutations, FUN=paste, sep="",collapse=""))
   the_list <- unique(the_list)
+
   return(the_list)
 }
 
 #' @name sbf_rank
 #' @title sbf_rank
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
+#' @author Walter van Heuven
 #'
-#' @description `sbf_rank` returns the summed Bigram Frequency (SBF) Rank
+#' @description `sbf_rank` returns the Summed Bigram Frequency (SBF) Rank
 #'
-#' @details Based on definition found in Novick & Sherman (2004)
+#' @details Based on definition found in Novick & Sherman (2004).
 #' @references \url{https://link.springer.com/article/10.3758/BF03195587}
 #'
 #' @param the_str letter string
@@ -429,17 +433,17 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
 
 #' @name gtzero
 #' @title gtzero
-#' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
+#' @author Walter van Heuven
 #'
-#' @description `gtzero` Returns the number of bigrams in the_str that exist in the bigram_table.
+#' @description `gtzero` returns the number of bigrams in letter string that exist in the bigram_table.
 #'
-#' @details Based on definition in Mendelsohn (1976),
+#' @details Based on definition of Mendelsohn (1976),
 #' @references \url{https://link.springer.com/article/10.3758/BF03213228}
 #'
-#' @param the_str the string
+#' @param the_str letter string
 #' @param bigram_table bigram table
 #'
-#' @return list of bigrams
+#' @return number of bigrams
 #'
 #' @export
 gtzero <- function(the_str, bigram_table) {

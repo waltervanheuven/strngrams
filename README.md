@@ -81,7 +81,7 @@ Script example to load lexicon, bigram frequencies , and saving file.
 
 ```R
 # test lexicon with 4 words
-db <- read.table("wordlists/test-lexicon.txt", header = TRUE, fileEncoding = "UTF-8")
+db <- read.table(strngrams::`test-lexicon`, header = TRUE, fileEncoding = "UTF-8")
 print(db)
 
 # get position specific bigram table based on lexicon
@@ -121,6 +121,6 @@ print(db)
 #4 baop         6                    30              10.000000
 
 # save to tab-delimited file
-write.table(db, col.names = T, row.names = F, file="tmp/db.txt", quote = FALSE, fileEncoding="UTF-8", sep="\t")
+write.table(db, col.names = T, row.names = F, file="test-lexicon_BF.txt", quote = FALSE, fileEncoding="UTF-8", sep="\t")
 
 ```

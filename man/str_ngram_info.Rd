@@ -24,7 +24,7 @@ str_ngram_info(
 
 \item{frequency}{type or token}
 
-\item{func}{summed}
+\item{func}{summed (default) or mean frequency}
 }
 \value{
 vector of frequencies
@@ -33,5 +33,5 @@ vector of frequencies
 `str_ngram_info` returns ngram info for each word (summed frequency) in a list
 }
 \author{
-Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+Walter van Heuven
 }

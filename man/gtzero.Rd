@@ -7,22 +7,22 @@
 gtzero(the_str, bigram_table)
 }
 \arguments{
-\item{the_str}{the string}
+\item{the_str}{letter string}
 
 \item{bigram_table}{bigram table}
 }
 \value{
-list of bigrams
+number of bigrams
 }
 \description{
-`gtzero` Returns the number of bigrams in the_str that exist in the bigram_table.
+`gtzero` returns the number of bigrams in letter string that exist in the bigram_table.
 }
 \details{
-Based on definition in Mendelsohn (1976),
+Based on definition of Mendelsohn (1976),
 }
 \references{
 \url{https://link.springer.com/article/10.3758/BF03213228}
 }
 \author{
-Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+Walter van Heuven
 }

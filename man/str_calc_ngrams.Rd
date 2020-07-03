@@ -14,11 +14,11 @@ str_calc_ngrams(
 \arguments{
 \item{word_list}{list of words}
 
+\item{freq_list}{list of frequencies for each word}
+
 \item{type}{monogram, bigram, or trigram}
 
-\item{position_specific}{TRUE or FALSE}
-
-\item{frequency_list}{list of frequencies for each word}
+\item{position_specific}{ngram is position specific or not: TRUE or FALSE}
 }
 \value{
 data.frame with a table of ngrams
@@ -27,5 +27,5 @@ data.frame with a table of ngrams
 `str_calc_ngrams` caclulates the ngrams of the strings in a list
 }
 \author{
-Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+Walter van Heuven
 }

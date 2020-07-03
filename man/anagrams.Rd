@@ -7,7 +7,7 @@
 anagrams(the_str)
 }
 \arguments{
-\item{the_str}{string of letters}
+\item{the_str}{letter string}
 }
 \value{
 vector of all possible anagrams
@@ -21,5 +21,5 @@ anagrams("DREAM")
 }
 }
 \author{
-Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+Walter van Heuven
 }

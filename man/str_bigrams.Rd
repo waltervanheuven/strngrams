@@ -7,7 +7,7 @@
 str_bigrams(the_str, type = "adjacent", max_distance = -1)
 }
 \arguments{
-\item{the_str}{a string}
+\item{the_str}{letter string}
 
 \item{type}{'all', 'adjacent', 'open'}
 
@@ -17,10 +17,12 @@ str_bigrams(the_str, type = "adjacent", max_distance = -1)
 list of characters
 }
 \description{
-`str_bigrams` returns the bigrams of a string
+`str_bigrams` returns the bigrams of a letter string
 }
 \details{
 strngrams
+
+Written by Walter van heuven, https://waltervanheuven.net
 
 Either all possible bigrams or only adjacent bigrams or open bigrams are returned
 }
@@ -31,5 +33,5 @@ str_bigram("DREAM", "all")
 }
 }
 \author{
-Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+Walter van Heuven
 }

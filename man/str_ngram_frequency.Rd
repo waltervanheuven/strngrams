@@ -14,11 +14,13 @@ str_ngram_frequency(
 )
 }
 \arguments{
-\item{the_str}{the character string}
+\item{the_str}{letter string}
 
 \item{ngram_table}{table with ngrams}
 
-\item{position_specific}{TRUE or FALSE}
+\item{type}{monogram, bigram, or trigram}
+
+\item{position_specific}{ngrams are position specific or not: TRUE or FALSE}
 
 \item{frequency}{type or token}
 
@@ -31,5 +33,5 @@ summed ngram frequency
 `str_ngram_frequency` caculates the ngram frequency of a string
 }
 \author{
-Walter van Heuven, \email{walter.vaheuven@nottingham.ac.uk}
+Walter van Heuven
 }
