@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{str_ngram_info}
 \alias{str_ngram_info}
-\title{ngram info for each word (summed frequency) in a list}
+\title{str_ngram_info}
 \usage{
 str_ngram_info(
   word_list,
@@ -30,5 +30,5 @@ str_ngram_info(
 vector of frequencies
 }
 \description{
-ngram info for each word (summed frequency) in a list
+`str_ngram_info` returns ngram info for each word (summed frequency) in a list
 }

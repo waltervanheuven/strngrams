@@ -1,8 +1,9 @@
-# strngrams.R
-#
+#' strngrams
 #' @author Walter van Heuven, \email{walter.vaheuven@@nottingham.ac.uk}
 
+
 #' @name str_bigrams
+#' @title str_bigrams
 #'
 #' @description `str_bigrams` returns the bigrams of a string
 #'
@@ -14,6 +15,12 @@
 #'
 #' @return list of characters
 #'
+#' @examples
+#' \dontrun{
+#' str_bigram("DREAM")
+#' str_bigram("DREAM", "all")
+#' }
+#' @export
 str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
   if (class(the_str) != 'character') {
     stop('Character expected')
@@ -79,6 +86,7 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 
 
 #' @name str_ngrams
+#' @title str_ngrams
 #'
 #' @description `str_ngrams` returns monograms, bigrams, or trigrams of a string with frequency information
 #'
@@ -88,6 +96,7 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 #'
 #' @return list of ngram, position, type frequency, token frequency
 #'
+#' @export
 str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
   # monograms: letters
   # bigrams: adjacent letter pairs in the string
@@ -134,6 +143,7 @@ str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
 }
 
 #' @name str_calc_ngrams
+#' @title str_calc_ngrams
 #'
 #' @description `str_calc_ngrams` caclulates the ngrams of the strings in a list
 #'
@@ -144,6 +154,7 @@ str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
 #'
 #' @return data.frame with a table of ngrams
 #'
+#' @export
 str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_specific = TRUE) {
   # check length of each list is the same
   n_words <- length(word_list)
@@ -179,6 +190,7 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
 
 
 #' @name str_ngram_frequency
+#' @title str_ngram_frequency
 #'
 #' @description `str_ngram_frequency` caculates the ngram frequency of a string
 #'
@@ -190,6 +202,7 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
 #'
 #' @return summed ngram frequency
 #'
+#' @export
 str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed") {
   if (is.null(ngram_table)) {
     stop("ngram_table missing")
@@ -253,6 +266,7 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
 }
 
 #' @name str_ngram_info
+#' @title str_ngram_info
 #'
 #' @description `str_ngram_info` returns ngram info for each word (summed frequency) in a list
 #'
@@ -265,6 +279,7 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
 #'
 #' @return vector of frequencies
 #'
+#' @export
 str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed") {
   if (is.null(ngram_table)) {
     stop("ngram_table missing")
@@ -284,6 +299,7 @@ str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_spe
 }
 
 #' @name anagrams
+#' @title anagrams
 #'
 #' @description `anagrams` returns all possible anagrams of the letter string
 #'
@@ -291,6 +307,11 @@ str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_spe
 #'
 #' @return vector of all possible anagrams
 #'
+#' @examples
+#' \dontrun{
+#' anagrams("DREAM")
+#' }
+#' @export
 anagrams <- function(the_str) {
   letters <- unlist(strsplit(the_str,""))
 
@@ -301,18 +322,20 @@ anagrams <- function(the_str) {
 }
 
 #' @name sbf_rank
+#' @title sbf_rank
 #'
 #' @description `sbf_rank` returns the summed Bigram Frequency (SBF) Rank
 #'
-#' @detail Based on definition found of Novick & Sherman (2004)
+#' @details Based on definition found of Novick & Sherman (2004)
 #'
-#' @param the_Str the letter string
+#' @param the_str letter string
 #' @param bigram_table bigram table
 #' @param top12 TRUE or FALSE
-#' @param method method to be used
+#' @param method method to be used, e.g. Novick (default)
 #'
 #' @return list with SBF, SBF rank, and anagrams with SBF >= SBF the_str
 #'
+#' @export
 sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
   bigrams <- str_bigrams(the_str, type = "adjacent")
   the_anagrams <- anagrams(the_str)
@@ -399,16 +422,18 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
 }
 
 #' @name gtzero
+#' @title gtzero
 #'
 #' @description `gtzero` Returns the number of bigrams in the_str that exist in the bigram_table.
 #'
-#' @detail Based on definition in Mendelsohn (1976)
+#' @details Based on definition in Mendelsohn (1976)
 #'
 #' @param the_str the string
 #' @param bigram_table bigram table
 #'
 #' @return list of bigrams
 #'
+#' @export
 gtzero <- function(the_str, bigram_table) {
   anagrams <- anagrams(the_str)
   n <- length(anagrams)

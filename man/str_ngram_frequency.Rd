@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{str_ngram_frequency}
 \alias{str_ngram_frequency}
-\title{Caculate ngram frequency of a string}
+\title{str_ngram_frequency}
 \usage{
 str_ngram_frequency(
   the_str,
@@ -28,5 +28,5 @@ str_ngram_frequency(
 summed ngram frequency
 }
 \description{
-Caculate ngram frequency of a string
+`str_ngram_frequency` caculates the ngram frequency of a string
 }

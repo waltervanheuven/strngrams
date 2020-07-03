@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{str_calc_ngrams}
 \alias{str_calc_ngrams}
-\title{Caclulate ngrams based strings in a list}
+\title{str_calc_ngrams}
 \usage{
 str_calc_ngrams(
   word_list,
@@ -24,5 +24,5 @@ str_calc_ngrams(
 data.frame with a table of ngrams
 }
 \description{
-Caclulate ngrams based strings in a list
+`str_calc_ngrams` caclulates the ngrams of the strings in a list
 }

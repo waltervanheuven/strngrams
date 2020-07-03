@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{anagrams}
 \alias{anagrams}
-\title{Create all possible anagrams of the letter string}
+\title{anagrams}
 \usage{
 anagrams(the_str)
 }
@@ -13,5 +13,10 @@ anagrams(the_str)
 vector of all possible anagrams
 }
 \description{
-Create all possible anagrams of the letter string
+`anagrams` returns all possible anagrams of the letter string
+}
+\examples{
+\dontrun{
+anagrams("DREAM")
+}
 }

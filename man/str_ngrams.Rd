@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{str_ngrams}
 \alias{str_ngrams}
-\title{str_ngrams returns monograms, bigrams, or trigrams of a string with frequency information}
+\title{str_ngrams}
 \usage{
 str_ngrams(the_str, type = "bigram", frequency = 1)
 }
@@ -17,5 +17,5 @@ str_ngrams(the_str, type = "bigram", frequency = 1)
 list of ngram, position, type frequency, token frequency
 }
 \description{
-str_ngrams returns monograms, bigrams, or trigrams of a string with frequency information
+`str_ngrams` returns monograms, bigrams, or trigrams of a string with frequency information
 }

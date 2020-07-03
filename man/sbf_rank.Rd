@@ -2,22 +2,25 @@
 % Please edit documentation in R/strngrams.R
 \name{sbf_rank}
 \alias{sbf_rank}
-\title{Summed Bigram Frequency (SBF) Rank}
+\title{sbf_rank}
 \usage{
 sbf_rank(the_str, bigram_table, top12 = FALSE, method = "Novick")
 }
 \arguments{
+\item{the_str}{letter string}
+
 \item{bigram_table}{bigram table}
 
 \item{top12}{TRUE or FALSE}
 
-\item{method}{method to be used}
-
-\item{the_Str}{the letter string}
+\item{method}{method to be used, e.g. Novick (default)}
 }
 \value{
 list with SBF, SBF rank, and anagrams with SBF >= SBF the_str
 }
 \description{
-Based on definition found in Novick & Sherman (2004)
+`sbf_rank` returns the summed Bigram Frequency (SBF) Rank
+}
+\details{
+Based on definition found of Novick & Sherman (2004)
 }

@@ -2,8 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{gtzero}
 \alias{gtzero}
-\title{Count number of bigrams in the_str that exist in the bigram_table.
-Match on bigram and position}
+\title{gtzero}
 \usage{
 gtzero(the_str, bigram_table)
 }
@@ -16,5 +15,8 @@ gtzero(the_str, bigram_table)
 list of bigrams
 }
 \description{
-Based on definition of Mendelsohn (1976)
+`gtzero` Returns the number of bigrams in the_str that exist in the bigram_table.
+}
+\details{
+Based on definition in Mendelsohn (1976)
 }
