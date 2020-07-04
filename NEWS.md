@@ -1,10 +1,15 @@
+
+## strngrams 0.3.3
+
+- Fixed bug with position specific token frequencies
+
 ## strngrams 0.3.2
 
-- Fixed issue with using integers for type parameter. 
+- Fixed issue with using integers for type parameter
 
 ## strngrams 0.3.1
 
-- Added pbapply to show progress bar.
+- Added pbapply to show progress bar
 
 ## strngrams 0.3.0
 

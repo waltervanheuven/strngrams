@@ -241,7 +241,7 @@ ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_
            "token" = {
               if (position_specific == TRUE) {
                 # check if ngram exists
-                if (nrow(ngram_table[ ngram_table[[lookup]] == ngram_str, ]) == 1) {
+                if (nrow(ngram_table[ ngram_table[[lookup]] == ngram_str & ngram_table[["pos"]] == p, ]) == 1) {
                   f <- f + ngram_table[ ngram_table[[lookup]] == ngram_str & ngram_table[["pos"]] == p,"token.frequency"]
                 }
                   p <- p + 1
