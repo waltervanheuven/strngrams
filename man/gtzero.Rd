@@ -9,7 +9,7 @@ gtzero(the_str, bigram_table)
 \arguments{
 \item{the_str}{letter string}
 
-\item{bigram_table}{bigram table}
+\item{bigram_table}{data frame with ngrams}
 }
 \value{
 number of bigrams

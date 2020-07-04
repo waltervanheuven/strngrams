@@ -16,7 +16,7 @@ ngram_frequency(
 \arguments{
 \item{word_list}{list of words}
 
-\item{ngram_table}{ngram table}
+\item{ngram_table}{data frame with ngrams}
 
 \item{type}{monogram, bigram, or trigram}
 

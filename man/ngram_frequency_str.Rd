@@ -16,7 +16,7 @@ ngram_frequency_str(
 \arguments{
 \item{the_str}{string}
 
-\item{ngram_table}{table with ngram frequencies, use function `get_ngram_frequencies` for this}
+\item{ngram_table}{data frame with ngram frequencies, use function `get_ngram_frequencies` for this}
 
 \item{type}{monogram, bigram, or trigram}
 

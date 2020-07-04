@@ -21,7 +21,7 @@ get_ngram_frequencies(
 \item{position_specific}{ngram is position specific or not: TRUE (default) or FALSE}
 }
 \value{
-data.frame with a table of ngrams and their frequencies
+data frame with ngrams and their frequencies
 }
 \description{
 `get_ngram_frequencies` returns the ngrams found in a lexicon and their frequencies
