@@ -104,7 +104,7 @@ print(db)
 df_bigrams <- get_ngram_frequencies(db$word, db$frequency, type = "bigram", position_specific = TRUE)
 print(df_bigrams)
 
-#   bigram pos type.frequency token.frequency
+#   ngram pos type.frequency token.frequency
 #1      ba   1              3              18
 #2      bo   1              1               8
 #3      al   2              1               2
@@ -117,21 +117,26 @@ print(df_bigrams)
 #10     op   3              1               6
 
 # calculate summed positional bigram frequencies and add those to db with words
-db$sum.bigram.freq.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed")
+db$sum.bf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed")
 
 # calculate mean positional bigram frequencies and add those to db with words
-db$mean.bigram.freq.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "mean")
+db$mean.bf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "mean")
+
+# type
+db$sum.bf.type <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "type", func = "summed")
+
+db$mean.bf.type <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "type", func = "mean")
 
 # note that functions above can take a long time when using a large lexicon
 
 # show lexicon with type and token bigram frequencies
 print(db)
 
-#  word frequency sum.bigram.freq.token mean.bigram.freq.token
-#1 bank        10                    38              12.666667
-#2 bobo         8                     8               2.666667
-#3 bald         2                    22               7.333333
-#4 baop         6                    30              10.000000
+#  word frequency sum.bf.token mean.bf.token sum.bf.type mean.bf.type
+#1 bank        10           38     12.666667           5     1.666667
+#2 bobo         8            8      2.666667           3     1.000000
+#3 bald         2           22      7.333333           5     1.666667
+#4 baop         6           30     10.000000           5     1.666667
 
 # save to tab-delimited file
 write.table(db, col.names = T, row.names = F, file="test-lexicon_BF.txt", quote = FALSE, fileEncoding="UTF-8", sep="\t")

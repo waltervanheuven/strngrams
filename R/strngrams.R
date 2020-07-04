@@ -109,7 +109,6 @@ ngrams <- function(the_str, type = "bigram", frequency = 1) {
     t <- type
   }
 
-
   # trim and get length
   # the_str <- str_trim(the_str)
   the_str_len <- stringr::str_length(the_str)
@@ -187,10 +186,10 @@ get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", positio
   # aggregate to sum frequencies
   if (position_specific == TRUE) {
     df2 <- stats::aggregate(list(df$type_frequency, df$token_frequency), by = list(df$ngram,df$pos), FUN = sum)
-    colnames(df2) <- c(type, "pos", "type.frequency", "token.frequency")
+    colnames(df2) <- c("ngram", "pos", "type.frequency", "token.frequency")
   } else {
     df2 <- stats::aggregate(list(df$type_frequency,df$token_frequency),by=list(df$ngram),FUN=sum)
-    colnames(df2) <- c(type, "type.frequency", "token.frequency")
+    colnames(df2) <- c("ngram", "type.frequency", "token.frequency")
   }
 
   return(df2)
@@ -233,6 +232,7 @@ ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_
 
   f <- 0
   p <- 1
+  lookup <- "ngram"
   for (ngram_start in 1:last_string_pos) {
     ngram_end <- ngram_start + (t - 1)
     ngram_str <- stringr::str_sub(the_str, ngram_start, ngram_end)
@@ -241,28 +241,28 @@ ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_
            "token" = {
               if (position_specific == TRUE) {
                 # check if ngram exists
-                if (nrow(ngram_table[ ngram_table[[type]] == ngram_str, ]) == 1) {
-                  f <- f + ngram_table[ngram_table[[type]] == ngram_str & ngram_table[["pos"]] == p,"token.frequency"]
+                if (nrow(ngram_table[ ngram_table[[lookup]] == ngram_str, ]) == 1) {
+                  f <- f + ngram_table[ ngram_table[[lookup]] == ngram_str & ngram_table[["pos"]] == p,"token.frequency"]
                 }
                   p <- p + 1
               } else {
                   # sum across positions if exists
-                  if (nrow(ngram_table[ ngram_table[[type]] == ngram_str, ]) == 1) {
-                    f <- f + sum(ngram_table[ngram_table[[type]] == ngram_str,"token.frequency"])
+                  if (nrow(ngram_table[ ngram_table[[lookup]] == ngram_str, ]) == 1) {
+                    f <- f + sum(ngram_table[ngram_table[[lookup]] == ngram_str,"token.frequency"])
                   }
               }
            },
            "type" = {
               if (position_specific == TRUE) {
                 # check if exists in table
-                if (nrow(ngram_table[ngram_table[[type]] == ngram_str & ngram_table[["pos"]] == p,]) == 1) {
-                  f <- f + ngram_table[ngram_table[[type]] == ngram_str & ngram_table[["pos"]] == p,"type.frequency"]
+                if (nrow(ngram_table[ngram_table[[lookup]] == ngram_str & ngram_table[["pos"]] == p,]) == 1) {
+                  f <- f + ngram_table[ngram_table[[lookup]] == ngram_str & ngram_table[["pos"]] == p,"type.frequency"]
                 }
                 p <- p + 1
               } else {
                 # sum across positions if found
-                if (nrow(ngram_table[ngram_table[[type]] == ngram_str, ]) == 1) {
-                  f <- f + sum(ngram_table[ngram_table[[type]] == ngram_str,"type.frequency"])
+                if (nrow(ngram_table[ngram_table[[lookup]] == ngram_str, ]) == 1) {
+                  f <- f + sum(ngram_table[ngram_table[[lookup]] == ngram_str,"type.frequency"])
                 }
               }
            }
@@ -367,7 +367,7 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
            p <- 1 # position
            for (b in bigrams) {
              # frequency bigram
-             frequency <- bigram_table[bigram_table$bigram == b & bigram_table$pos == p, "type.frequency"]
+             frequency <- bigram_table[bigram_table$ngram == b & bigram_table$pos == p, "type.frequency"]
              bf <- c(bf, frequency)
              p <- p + 1
            }
@@ -404,7 +404,7 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
            p <- 1 # position
            for (b in bigrams) {
              # frequency bigram
-             frequency <- bigram_table[bigram_table$bigram == b & bigram_table$pos == p, "type.frequency"]
+             frequency <- bigram_table[bigram_table$ngram == b & bigram_table$pos == p, "type.frequency"]
              # store frequency of correct
              bf <- c(bf, frequency)
              # summed bigram frequency
@@ -464,7 +464,7 @@ gtzero <- function(the_str, bigram_table) {
 
   # find the bigrams that are in the bigram_table
   # match on bigram and position
-  found <- merge(bt[, c("bigram","pos")], bigram_table, by = c("bigram","pos"))
+  found <- merge(bt[, c("ngram","pos")], bigram_table, by = c("ngram","pos"))
   gtz <- nrow(found)
 
   return(gtz)
