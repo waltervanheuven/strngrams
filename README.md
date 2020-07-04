@@ -97,11 +97,11 @@ the_file <- system.file("extdata", "test-lexicon.txt", package = "strngrams")
 db <- read.table(the_file, header = TRUE, fileEncoding = "UTF-8")
 print(db)
 
-# get position specific bigram table based on lexicon
+# extract position specific bigrams and their frequencies from a lexicon
 #
-# table contains both type nd token frequencies for each bigram
+# returned data frame contains both type nd token frequencies for each bigram
 #
-bigram_table <- get_ngram_frequencies(db$word, db$frequency, type = "bigram", position_specific = TRUE)
+df_bigrams <- get_ngram_frequencies(db$word, db$frequency, type = "bigram", position_specific = TRUE)
 print(bigram_table)
 
 #   bigram pos type.frequency token.frequency
@@ -117,10 +117,10 @@ print(bigram_table)
 #10     op   3              1               6
 
 # calculate summed positional bigram frequencies and add those to db with words
-db$sum.bigram.freq.token <- ngram_frequency(db$word, bigram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed")
+db$sum.bigram.freq.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed")
 
 # calculate mean positional bigram frequencies and add those to db with words
-db$mean.bigram.freq.token <- ngram_frequency(db$word, bigram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "mean")
+db$mean.bigram.freq.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "mean")
 
 # note that functions above can take a long time when using a large lexicon
 

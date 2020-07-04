@@ -160,7 +160,7 @@ ngrams <- function(the_str, type = "bigram", frequency = 1) {
 #' @param type string "monogram", "bigram" (default), "trigram", or number of characters of ngram
 #' @param position_specific ngram is position specific or not: TRUE (default) or FALSE
 #'
-#' @return data.frame with a table of ngrams and their frequencies
+#' @return data frame with ngrams and their frequencies
 #'
 #' @export
 get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", position_specific = TRUE) {
@@ -204,7 +204,7 @@ get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", positio
 #' @description `ngram_frequency_str` computes the ngram frequency of a single string
 #'
 #' @param the_str string
-#' @param ngram_table table with ngram frequencies, use function `get_ngram_frequencies` for this
+#' @param ngram_table data frame with ngram frequencies, use function `get_ngram_frequencies` for this
 #' @param type monogram, bigram, or trigram
 #' @param position_specific ngrams are position specific or not: TRUE or FALSE
 #' @param frequency type or token
@@ -286,7 +286,7 @@ ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_
 #' @description `ngram_frequency` returns ngram info for each word (summed frequency) in a list
 #'
 #' @param word_list list of words
-#' @param ngram_table ngram table
+#' @param ngram_table data frame with ngrams
 #' @param type monogram, bigram, or trigram
 #' @param position_specific TRUE or FALSE
 #' @param frequency type or token
@@ -348,7 +348,7 @@ anagrams <- function(the_str) {
 #' @references \url{https://link.springer.com/article/10.3758/BF03195587}
 #'
 #' @param the_str string
-#' @param bigram_table bigram table
+#' @param bigram_table data frame with ngrams
 #' @param top12 TRUE or FALSE
 #' @param method method to be used, e.g. Novick (default)
 #'
@@ -450,7 +450,7 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
 #' @references \url{https://link.springer.com/article/10.3758/BF03213228}
 #'
 #' @param the_str letter string
-#' @param bigram_table bigram table
+#' @param bigram_table data frame with ngrams
 #'
 #' @return number of bigrams
 #'
