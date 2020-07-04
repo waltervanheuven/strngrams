@@ -6,7 +6,7 @@
 
 ```R
 library(devtools)
-remotes::install_github("waltervanheuven/strngrams")
+devtools::install_github("waltervanheuven/strngrams")
 
 library(strngrams)
 ```
@@ -25,6 +25,36 @@ bigrams("DREAM")
 ```R
 bigrams("DREAM", "open")
 # [1] "DR" "DE" "DA" "DM" "RE" "RA" "RM" "EA" "EM" "AM"
+```
+
+### ngrams
+
+```R
+ngrams("DREAM", "trigram")
+#$ngram
+#[1] "DRE" "REA" "EAM"
+#
+#$position
+#[1] 1 2 3
+#
+#$type_frequency
+#[1] 1 1 1
+#
+#$token_frequency
+#[1] 1 1 1
+
+ngrams("DREAM", 4)
+#$ngram
+#[1] "DREA" "REAM"
+#
+#$position
+#[1] 1 2
+#
+$type_frequency
+#[1] 1 1
+#
+#$token_frequency
+#[1] 1 1
 ```
 
 ### Anagrams
@@ -63,11 +93,9 @@ Script example to load lexicon, bigram frequencies , and saving file.
 
 ```R
 # test lexicon with 4 words
-# db <- read.table("test-lexicon.txt", header = TRUE, fileEncoding = "UTF-8")
-db <- strngrams::`test-lexicon`
+the_file <- system.file("extdata", "test-lexicon.txt", package = "strngrams")
+db <- read.table(the_file, header = TRUE, fileEncoding = "UTF-8")
 print(db)
-
-print(strngrams::`test-lexicon`)
 
 # get position specific bigram table based on lexicon
 #

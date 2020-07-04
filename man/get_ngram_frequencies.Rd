@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{get_ngram_frequencies}
 \alias{get_ngram_frequencies}
-\title{get_ngram_frequencies}
+\title{ngram frequencies based on lexicon}
 \usage{
 get_ngram_frequencies(
   word_list,
@@ -16,15 +16,15 @@ get_ngram_frequencies(
 
 \item{freq_list}{list of frequencies for each word}
 
-\item{type}{monogram, bigram (default), or trigram}
+\item{type}{string "monogram", "bigram" (default), "trigram", or number of characters of ngram}
 
 \item{position_specific}{ngram is position specific or not: TRUE (default) or FALSE}
 }
 \value{
-data.frame with a table of ngrams
+data.frame with a table of ngrams and their frequencies
 }
 \description{
-`get_ngram_frequencies` returns the ngrams of a lexicon
+`get_ngram_frequencies` returns the ngrams found in a lexicon and their frequencies
 }
 \author{
 Walter van Heuven

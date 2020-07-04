@@ -2,14 +2,14 @@
 % Please edit documentation in R/strngrams.R
 \name{ngrams}
 \alias{ngrams}
-\title{ngrams}
+\title{ngrams of a string}
 \usage{
 ngrams(the_str, type = "bigram", frequency = 1)
 }
 \arguments{
-\item{the_str}{letter string}
+\item{the_str}{string}
 
-\item{type}{monogram, bigram, or trigram}
+\item{type}{string "monogram", "bigram", "trigram", or integer (number of characters in the ngram)}
 
 \item{frequency}{frequency of the letter string (word)}
 }

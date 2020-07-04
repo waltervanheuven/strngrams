@@ -2,10 +2,16 @@ Package: strngrams
 Type: Package
 Title: Extract string ngrams, create anagrams, and calculate type/token frequencies
 Version: 0.3.0
-Author: Walter van Heuven
+Authors@R: person("Walter", "van Heuven", email = "walter.vanheuven@nottingham.ac.uk",
+  role = c("aut", "cre"))
 Maintainer: The package maintainer <walter.vanheuven@nottingham.ac.uk>
 Description: Package contains functions to extract ngrams (e.g., letters, bigrams, trigrams), create anagrams, and calculate summed/mean ngram type and token frequencies of letter strings.
-License: LICENSE
+License: MIT + file LICENSE
+URL: https://github.com/waltervanheuven/strngrams
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
+Imports: 
+   stringr, 
+   combinat, 
+   utils

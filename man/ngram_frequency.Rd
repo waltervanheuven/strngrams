@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{ngram_frequency}
 \alias{ngram_frequency}
-\title{ngram_frequency}
+\title{ngram frequency of each word in the list}
 \usage{
 ngram_frequency(
   word_list,

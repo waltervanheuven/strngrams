@@ -3,14 +3,14 @@
 #' Written by Walter van heuven, https://waltervanheuven.net
 
 #' @name bigrams
-#' @title bigrams
+#' @title bigrams of a character string
 #' @author Walter van Heuven
 #'
-#' @description `bigrams` returns the bigrams of a letter string
+#' @description `bigrams` return the bigrams of a letter string
 #'
 #' @details Either all possible bigrams or only adjacent bigrams or open bigrams are returned
 #'
-#' @param the_str letter string
+#' @param the_str character string
 #' @param type 'all', 'adjacent', 'open'
 #' @param max_distance distance between the letters of the open bigrams. -1 no restriction for the number of open bigrams
 #'
@@ -87,13 +87,13 @@ bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 
 
 #' @name ngrams
-#' @title ngrams
+#' @title ngrams of a string
 #' @author Walter van Heuven
 #'
 #' @description `ngrams` returns letters, bigrams, or trigrams of a string with frequencies added
 #'
-#' @param the_str letter string
-#' @param type string "monogram", "bigram", "trigram", or number of characters of ngram
+#' @param the_str string
+#' @param type string "monogram", "bigram", "trigram", or integer (number of characters in the ngram)
 #' @param frequency frequency of the letter string (word)
 #'
 #' @return list of ngram, position, type frequency, token frequency
@@ -150,17 +150,17 @@ ngrams <- function(the_str, type = "bigram", frequency = 1) {
 }
 
 #' @name get_ngram_frequencies
-#' @title get_ngram_frequencies
+#' @title ngram frequencies based on lexicon
 #' @author Walter van Heuven
 #'
-#' @description `get_ngram_frequencies` returns the ngrams of a lexicon
+#' @description `get_ngram_frequencies` returns the ngrams found in a lexicon and their frequencies
 #'
 #' @param word_list list of words
 #' @param freq_list list of frequencies for each word
 #' @param type string "monogram", "bigram" (default), "trigram", or number of characters of ngram
 #' @param position_specific ngram is position specific or not: TRUE (default) or FALSE
 #'
-#' @return data.frame with a table of ngrams
+#' @return data.frame with a table of ngrams and their frequencies
 #'
 #' @export
 get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", position_specific = TRUE) {
@@ -198,12 +198,12 @@ get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", positio
 
 
 #' @name ngram_frequency_str
-#' @title ngram_frequency_str
+#' @title ngram frequency of a string
 #' @author Walter van Heuven
 #'
-#' @description `ngram_frequency_str` calculates the ngram frequency of a single string
+#' @description `ngram_frequency_str` computes the ngram frequency of a single string
 #'
-#' @param the_str letter string
+#' @param the_str string
 #' @param ngram_table table with ngram frequencies, use function `get_ngram_frequencies` for this
 #' @param type monogram, bigram, or trigram
 #' @param position_specific ngrams are position specific or not: TRUE or FALSE
@@ -280,7 +280,7 @@ ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_
 }
 
 #' @name ngram_frequency
-#' @title ngram_frequency
+#' @title ngram frequency of each word in the list
 #' @author Walter van Heuven
 #'
 #' @description `ngram_frequency` returns ngram info for each word (summed frequency) in a list
@@ -314,12 +314,12 @@ ngram_frequency <- function(word_list, ngram_table, type = "bigram", position_sp
 }
 
 #' @name anagrams
-#' @title anagrams
+#' @title anagrams of a string
 #' @author Walter van Heuven
 #'
-#' @description `anagrams` returns all possible anagrams of the letter string
+#' @description `anagrams` returns all possible anagrams of the string
 #'
-#' @param the_str letter string
+#' @param the_str string
 #'
 #' @return vector of all possible anagrams
 #'
@@ -339,7 +339,7 @@ anagrams <- function(the_str) {
 }
 
 #' @name sbf_rank
-#' @title sbf_rank
+#' @title Summed Bigram Frequency Rank
 #' @author Walter van Heuven
 #'
 #' @description `sbf_rank` returns the Summed Bigram Frequency (SBF) Rank
@@ -347,7 +347,7 @@ anagrams <- function(the_str) {
 #' @details Based on definition found in Novick & Sherman (2004).
 #' @references \url{https://link.springer.com/article/10.3758/BF03195587}
 #'
-#' @param the_str letter string
+#' @param the_str string
 #' @param bigram_table bigram table
 #' @param top12 TRUE or FALSE
 #' @param method method to be used, e.g. Novick (default)

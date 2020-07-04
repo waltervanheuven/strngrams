@@ -2,12 +2,12 @@
 % Please edit documentation in R/strngrams.R
 \name{sbf_rank}
 \alias{sbf_rank}
-\title{sbf_rank}
+\title{Summed Bigram Frequency Rank}
 \usage{
 sbf_rank(the_str, bigram_table, top12 = FALSE, method = "Novick")
 }
 \arguments{
-\item{the_str}{letter string}
+\item{the_str}{string}
 
 \item{bigram_table}{bigram table}
 

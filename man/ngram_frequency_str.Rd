@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{ngram_frequency_str}
 \alias{ngram_frequency_str}
-\title{ngram_frequency_str}
+\title{ngram frequency of a string}
 \usage{
 ngram_frequency_str(
   the_str,
@@ -14,7 +14,7 @@ ngram_frequency_str(
 )
 }
 \arguments{
-\item{the_str}{letter string}
+\item{the_str}{string}
 
 \item{ngram_table}{table with ngram frequencies, use function `get_ngram_frequencies` for this}
 
@@ -30,7 +30,7 @@ ngram_frequency_str(
 summed ngram frequency
 }
 \description{
-`ngram_frequency_str` calculates the ngram frequency of a single string
+`ngram_frequency_str` computes the ngram frequency of a single string
 }
 \author{
 Walter van Heuven

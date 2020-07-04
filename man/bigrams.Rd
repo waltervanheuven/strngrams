@@ -2,12 +2,12 @@
 % Please edit documentation in R/strngrams.R
 \name{bigrams}
 \alias{bigrams}
-\title{bigrams}
+\title{bigrams of a character string}
 \usage{
 bigrams(the_str, type = "adjacent", max_distance = -1)
 }
 \arguments{
-\item{the_str}{letter string}
+\item{the_str}{character string}
 
 \item{type}{'all', 'adjacent', 'open'}
 
@@ -17,7 +17,7 @@ bigrams(the_str, type = "adjacent", max_distance = -1)
 list of characters
 }
 \description{
-`bigrams` returns the bigrams of a letter string
+`bigrams` return the bigrams of a letter string
 }
 \details{
 strngrams

@@ -2,18 +2,18 @@
 % Please edit documentation in R/strngrams.R
 \name{anagrams}
 \alias{anagrams}
-\title{anagrams}
+\title{anagrams of a string}
 \usage{
 anagrams(the_str)
 }
 \arguments{
-\item{the_str}{letter string}
+\item{the_str}{string}
 }
 \value{
 vector of all possible anagrams
 }
 \description{
-`anagrams` returns all possible anagrams of the letter string
+`anagrams` returns all possible anagrams of the string
 }
 \examples{
 \dontrun{
