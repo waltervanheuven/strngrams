@@ -103,7 +103,12 @@ ngrams <- function(the_str, type = "bigram", frequency = 1) {
   # monograms: letters
   # bigrams: adjacent letter pairs in the string
   # trigrams: adjacent letter triplets in the string
-  t <- switch(type, "monogram" = 1, "bigram" = 2, "trigram" = 3)
+  if (is.character(type)) {
+    t <- switch(type, "monogram" = 1, "bigram" = 2, "trigram" = 3, 2)
+  } else {
+    t <- type
+  }
+
 
   # trim and get length
   # the_str <- str_trim(the_str)
@@ -213,7 +218,11 @@ ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_
     stop("ngram_table missing")
   }
 
-  t <- switch(type, "monogram" = 1, "bigram" = 2, "trigram" = 3, 2)
+  if (is.character(type)) {
+    t <- switch(type, "monogram" = 1, "bigram" = 2, "trigram" = 3, 2)
+  } else {
+    t <- type
+  }
 
   the_str_len <- stringr::str_length(the_str)
   if (the_str_len > t) {
