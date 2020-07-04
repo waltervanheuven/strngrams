@@ -93,7 +93,7 @@ bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 #' @description `ngrams` returns letters, bigrams, or trigrams of a string with frequencies added
 #'
 #' @param the_str letter string
-#' @param type monogram, bigram, or trigram
+#' @param type string "monogram", "bigram", "trigram", or number of characters of ngram
 #' @param frequency frequency of the letter string (word)
 #'
 #' @return list of ngram, position, type frequency, token frequency
@@ -157,7 +157,7 @@ ngrams <- function(the_str, type = "bigram", frequency = 1) {
 #'
 #' @param word_list list of words
 #' @param freq_list list of frequencies for each word
-#' @param type monogram, bigram (default), or trigram
+#' @param type string "monogram", "bigram" (default), "trigram", or number of characters of ngram
 #' @param position_specific ngram is position specific or not: TRUE (default) or FALSE
 #'
 #' @return data.frame with a table of ngrams
