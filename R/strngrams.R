@@ -171,7 +171,7 @@ get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", positio
   }
 
   # apply ngram to each word
-  ngram_list <- mapply(word_list, FUN = ngrams, rep(type, n_words), frequency = freq_list)
+  ngram_list <- pbapply::pbmapply(word_list, FUN = ngrams, rep(type, n_words), frequency = freq_list)
 
   # create data.frame
   s <- as.character(unlist(ngram_list["ngram",]))
@@ -302,7 +302,7 @@ ngram_frequency <- function(word_list, ngram_table, type = "bigram", position_sp
   f <- c()
   word_list <- as.character(word_list)
 
-  f <- as.numeric(lapply(word_list,
+  f <- as.numeric(pbapply::pblapply(word_list,
                          ngram_frequency_str,
                          ngram_table = ngram_table,
                          type = type,
@@ -393,7 +393,8 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
              the_list <- utils::head(df, 12)
            }
          },
-         "Gilhooly" = { # --------------- NOT YET WORKING PROPERLY ------------------
+         "Gilhooly" = {
+           #  NOT YET WORKING PROPERLY
 
            # method based on Gilhooly (1978)
            # requires type frequencies
