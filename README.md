@@ -99,10 +99,10 @@ print(db)
 
 # extract position specific bigrams and their frequencies from a lexicon
 #
-# returned data frame contains both type nd token frequencies for each bigram
+# returned data frame contains both type and token frequencies for each bigram
 #
 df_bigrams <- get_ngram_frequencies(db$word, db$frequency, type = "bigram", position_specific = TRUE)
-print(bigram_table)
+print(df_bigrams)
 
 #   bigram pos type.frequency token.frequency
 #1      ba   1              3              18
