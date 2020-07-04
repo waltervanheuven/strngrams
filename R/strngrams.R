@@ -2,11 +2,11 @@
 #'
 #' Written by Walter van heuven, https://waltervanheuven.net
 
-#' @name str_bigrams
-#' @title str_bigrams
+#' @name bigrams
+#' @title bigrams
 #' @author Walter van Heuven
 #'
-#' @description `str_bigrams` returns the bigrams of a letter string
+#' @description `bigrams` returns the bigrams of a letter string
 #'
 #' @details Either all possible bigrams or only adjacent bigrams or open bigrams are returned
 #'
@@ -22,7 +22,7 @@
 #' str_bigram("DREAM", "all")
 #' }
 #' @export
-str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
+bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
   if (class(the_str) != 'character') {
     stop('Character expected')
   }
@@ -45,7 +45,7 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
          },
          "adjacent" = {
            # only adjacent bigrams
-           bigram_list <- str_bigrams(the_str, type = "open", max_distance = 1)
+           bigram_list <- bigrams(the_str, type = "open", max_distance = 1)
          },
          "open" = {
            # open bigrams; letter combinations are in the correct order
@@ -86,11 +86,11 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 }
 
 
-#' @name str_ngrams
-#' @title str_ngrams
+#' @name ngrams
+#' @title ngrams
 #' @author Walter van Heuven
 #'
-#' @description `str_ngrams` returns monograms, bigrams, or trigrams of a string with frequency information
+#' @description `ngrams` returns letters, bigrams, or trigrams of a string with frequencies added
 #'
 #' @param the_str letter string
 #' @param type monogram, bigram, or trigram
@@ -99,7 +99,7 @@ str_bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
 #' @return list of ngram, position, type frequency, token frequency
 #'
 #' @export
-str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
+ngrams <- function(the_str, type = "bigram", frequency = 1) {
   # monograms: letters
   # bigrams: adjacent letter pairs in the string
   # trigrams: adjacent letter triplets in the string
@@ -144,21 +144,21 @@ str_ngrams <- function(the_str, type = "bigram", frequency = 1) {
   )
 }
 
-#' @name str_calc_ngrams
-#' @title str_calc_ngrams
+#' @name get_ngram_frequencies
+#' @title get_ngram_frequencies
 #' @author Walter van Heuven
 #'
-#' @description `str_calc_ngrams` caclulates the ngrams of the strings in a list
+#' @description `get_ngram_frequencies` returns the ngrams of a lexicon
 #'
 #' @param word_list list of words
 #' @param freq_list list of frequencies for each word
-#' @param type monogram, bigram, or trigram
-#' @param position_specific ngram is position specific or not: TRUE or FALSE
+#' @param type monogram, bigram (default), or trigram
+#' @param position_specific ngram is position specific or not: TRUE (default) or FALSE
 #'
 #' @return data.frame with a table of ngrams
 #'
 #' @export
-str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_specific = TRUE) {
+get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", position_specific = TRUE) {
   # check length of each list is the same
   n_words <- length(word_list)
   if (n_words != length(freq_list)) {
@@ -166,7 +166,7 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
   }
 
   # apply ngram to each word
-  ngram_list <- mapply(word_list, FUN = str_ngrams, rep(type, n_words), frequency = freq_list)
+  ngram_list <- mapply(word_list, FUN = ngrams, rep(type, n_words), frequency = freq_list)
 
   # create data.frame
   s <- as.character(unlist(ngram_list["ngram",]))
@@ -192,14 +192,14 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
 }
 
 
-#' @name str_ngram_frequency
-#' @title str_ngram_frequency
+#' @name ngram_frequency_str
+#' @title ngram_frequency_str
 #' @author Walter van Heuven
 #'
-#' @description `str_ngram_frequency` caculates the ngram frequency of a string
+#' @description `ngram_frequency_str` calculates the ngram frequency of a single string
 #'
 #' @param the_str letter string
-#' @param ngram_table table with ngrams
+#' @param ngram_table table with ngram frequencies, use function `get_ngram_frequencies` for this
 #' @param type monogram, bigram, or trigram
 #' @param position_specific ngrams are position specific or not: TRUE or FALSE
 #' @param frequency type or token
@@ -208,7 +208,7 @@ str_calc_ngrams <- function(word_list, freq_list, type = "bigram", position_spec
 #' @return summed ngram frequency
 #'
 #' @export
-str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed") {
+ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed") {
   if (is.null(ngram_table)) {
     stop("ngram_table missing")
   }
@@ -270,11 +270,11 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
   return(f)
 }
 
-#' @name str_ngram_info
-#' @title str_ngram_info
+#' @name ngram_frequency
+#' @title ngram_frequency
 #' @author Walter van Heuven
 #'
-#' @description `str_ngram_info` returns ngram info for each word (summed frequency) in a list
+#' @description `ngram_frequency` returns ngram info for each word (summed frequency) in a list
 #'
 #' @param word_list list of words
 #' @param ngram_table ngram table
@@ -283,10 +283,10 @@ str_ngram_frequency <- function(the_str, ngram_table, type = "bigram", position_
 #' @param frequency type or token
 #' @param func summed (default) or mean frequency
 #'
-#' @return vector of frequencies
+#' @return list of frequencies
 #'
 #' @export
-str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed") {
+ngram_frequency <- function(word_list, ngram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed") {
   if (is.null(ngram_table)) {
     stop("ngram_table missing")
   }
@@ -294,7 +294,7 @@ str_ngram_info <- function(word_list, ngram_table, type = "bigram", position_spe
   word_list <- as.character(word_list)
 
   f <- as.numeric(lapply(word_list,
-                         str_ngram_frequency,
+                         ngram_frequency_str,
                          ngram_table = ngram_table,
                          type = type,
                          position_specific = position_specific,
@@ -347,7 +347,7 @@ anagrams <- function(the_str) {
 #'
 #' @export
 sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
-  bigrams <- str_bigrams(the_str, type = "adjacent")
+  bigrams <- bigrams(the_str, type = "adjacent")
   the_anagrams <- anagrams(the_str)
 
   switch(method,
@@ -365,11 +365,11 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
 
            # summed bigram frequency of the_str
            #sbf_the_str <- str_summed_ngram(the_str, bigram_table, type = "bigram", frequency = "type")
-           sbf_str_str <- str_ngram_frequency(the_str, bigram_table, type = "bigram", frequency = "type")
+           sbf_str_str <- ngram_frequency_str(the_str, bigram_table, type = "bigram", frequency = "type")
 
            # data.frame with anagrams
            df <- data.frame(anagrams = the_anagrams, sbf = 0)
-           df$sbf <- str_ngram_info(df$anagrams, bigram_table, type = "bigram", frequency = "type")
+           df$sbf <- ngram_frequency(df$anagrams, bigram_table, type = "bigram", frequency = "type")
 
            # NA to zero
            df[is.na(df)] <- 0
@@ -406,7 +406,7 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
            # data.frame with anagrams
            df <- data.frame(anagrams = the_anagrams, sbf = 0)
            df$sbf <-
-             str_ngram_info(df$anagrams,
+             ngram_frequency(df$anagrams,
                         bigram_table,
                         type = "bigram",
                         frequency = "type")
@@ -450,7 +450,7 @@ gtzero <- function(the_str, bigram_table) {
   anagrams <- anagrams(the_str)
   n <- length(anagrams)
 
-  bt <- str_calc_ngrams(anagrams, rep(1,n), type = "bigram", position_specific = T)
+  bt <- get_ngram_frequencies(anagrams, rep(1,n), type = "bigram", position_specific = T)
 
   # find the bigrams that are in the bigram_table
   # match on bigram and position
