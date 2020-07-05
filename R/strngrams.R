@@ -370,23 +370,25 @@ ngram_frequency <- function(word_list, ngram_table, type = "bigram",
 #' }
 #' @export
 anagrams <- function(the_str, wordList = NULL, progressbar = TRUE) {
-  the_list <- c()
   if (is.null(wordList)) {
     # create all possible permutations of the_str!
     # no check if these are words
     # avoid using long strings as the number of permutations explode, n!
-    str_letters <- unlist(strsplit(the_str,""))
+    str_letters <- unlist(strsplit(the_str, ""))
     the_permutations <- combinat::permn(str_letters)
-    the_list <- unlist(lapply(the_permutations, FUN=paste, sep="",collapse=""))
+    the_list <- unlist(lapply(the_permutations, FUN=paste, sep="", collapse=""))
     the_list <- unique(the_list)
 
   } else {
     # use wordList to find word anagrams
     if (progressbar == TRUE) {
-      the_list <- wordList[unlist(pbapply::pblapply(wordList, are_anagrams, w2 = the_str))]
+      the_list <- wordList[unlist(pbapply::pblapply(wordList, FUN=are_anagrams, w1=the_str))]
     } else {
-      the_list <- wordList[unlist(lapply(wordList, are_anagrams, w2 = the_str))]
+      the_list <- wordList[unlist(lapply(wordList, FUN=are_anagrams, w1=the_str))]
     }
+  }
+  if (length(the_list) == 0) {
+    the_list <- NULL
   }
   return(the_list)
 }
@@ -404,8 +406,8 @@ anagrams <- function(the_str, wordList = NULL, progressbar = TRUE) {
 are_anagrams <- function(w1, w2) {
   if (stringr::str_length(w1) == stringr::str_length(w2)) {
     if (w1 != w2) {
-      w1_letters <- unlist(strsplit(w1,""))
-      w2_letters <- unlist(strsplit(w2,""))
+      w1_letters <- unlist(strsplit(w1, ""))
+      w2_letters <- unlist(strsplit(w2, ""))
       for (l in w1_letters) {
         w2_letters <- w2_letters[-match(l, w2_letters)]
       }
