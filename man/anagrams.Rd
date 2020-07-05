@@ -4,10 +4,14 @@
 \alias{anagrams}
 \title{anagrams of a string}
 \usage{
-anagrams(the_str)
+anagrams(the_str, wordList = NULL, progressbar = TRUE)
 }
 \arguments{
 \item{the_str}{string}
+
+\item{wordList}{list of words}
+
+\item{progressbar}{show progress bar TRUE or FALSE}
 }
 \value{
 vector of all possible anagrams
@@ -17,7 +21,11 @@ vector of all possible anagrams
 }
 \examples{
 \dontrun{
-anagrams("DREAM")
+# return all anagrams that are words
+anagrams("dream", vwr::english.words)
+
+# return all anagram letter strings, if none is found return NULL
+anagrams("dream")
 }
 }
 \author{

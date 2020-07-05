@@ -17,22 +17,22 @@ library(strngrams)
 
 ```R
 bigrams("DREAM")
-# [1] "DR" "RE" "EA" "AM"
+# [1] "dr" "re" "ea" "am"
 ```
 
 ### open bigrams
 
 ```R
-bigrams("DREAM", "open")
-# [1] "DR" "DE" "DA" "DM" "RE" "RA" "RM" "EA" "EM" "AM"
+bigrams("dream", "open")
+# [1] "dr" "de" "da" "dm" "re" "ra" "rm" "ea" "em" "am"
 ```
 
 ### ngrams
 
 ```R
-ngrams("DREAM", "trigram")
+ngrams("dream", "trigram")
 #$ngram
-#[1] "DRE" "REA" "EAM"
+#[1] "dre" "rea" "eam"
 #
 #$position
 #[1] 1 2 3
@@ -43,14 +43,14 @@ ngrams("DREAM", "trigram")
 #$token_frequency
 #[1] 1 1 1
 
-ngrams("DREAM", 4)
+ngrams("dream", 4)
 #$ngram
-#[1] "DREA" "REAM"
+#[1] "drea" "ream"
 #
 #$position
 #[1] 1 2
 #
-$type_frequency
+#$type_frequency
 #[1] 1 1
 #
 #$token_frequency
@@ -60,18 +60,11 @@ $type_frequency
 ### Anagrams
 
 ```R
-anagrams("DREAM")
-#  [1] "DREAM" "DREMA" "DRMEA" "DMREA" "MDREA" "MDRAE" "DMRAE" "DRMAE" "DRAME" "DRAEM" "DAREM"
-# [12] "DARME" "DAMRE" "DMARE" "MDARE" "MADRE" "AMDRE" "ADMRE" "ADRME" "ADREM" "ADERM" "ADEMR"
-# [23] "ADMER" "AMDER" "MADER" "MDAER" "DMAER" "DAMER" "DAEMR" "DAERM" "DEARM" "DEAMR" "DEMAR"
-# [34] "DMEAR" "MDEAR" "MDERA" "DMERA" "DEMRA" "DERMA" "DERAM" "EDRAM" "EDRMA" "EDMRA" "EMDRA"
-# [45] "MEDRA" "MEDAR" "EMDAR" "EDMAR" "EDAMR" "EDARM" "EADRM" "EADMR" "EAMDR" "EMADR" "MEADR"
-# [56] "MAEDR" "AMEDR" "AEMDR" "AEDMR" "AEDRM" "AERDM" "AERMD" "AEMRD" "AMERD" "MAERD" "MEARD"
-# [67] "EMARD" "EAMRD" "EARMD" "EARDM" "ERADM" "ERAMD" "ERMAD" "EMRAD" "MERAD" "MERDA" "EMRDA"
-# [78] "ERMDA" "ERDMA" "ERDAM" "REDAM" "REDMA" "REMDA" "RMEDA" "MREDA" "MREAD" "RMEAD" "REMAD"
-# [89] "REAMD" "READM" "RAEDM" "RAEMD" "RAMED" "RMAED" "MRAED" "MARED" "AMRED" "ARMED" "AREMD"
-#[100] "AREDM" "ARDEM" "ARDME" "ARMDE" "AMRDE" "MARDE" "MRADE" "RMADE" "RAMDE" "RADME" "RADEM"
-#[111] "RDAEM" "RDAME" "RDMAE" "RMDAE" "MRDAE" "MRDEA" "RMDEA" "RDMEA" "RDEMA" "RDEAM"
+anagrams("dream", vwr::english.words)
+# [1] "armed"
+
+anagrams("silence", vwr::english.words)
+#[1] "selenic" "license"
 ```
 
 ### Bigram frequencies of words in lexicon

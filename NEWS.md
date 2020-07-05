@@ -1,4 +1,9 @@
 
+## strngrams 0.3.4
+
+- Anagrams function now can return only strings that are words.
+- Progress bars can be turned off.
+
 ## strngrams 0.3.3
 
 - Fixed bug with position specific token frequencies

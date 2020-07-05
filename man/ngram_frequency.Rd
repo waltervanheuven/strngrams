@@ -10,7 +10,8 @@ ngram_frequency(
   type = "bigram",
   position_specific = TRUE,
   frequency = "token",
-  func = "summed"
+  func = "summed",
+  progressbar = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ ngram_frequency(
 \item{frequency}{type or token}
 
 \item{func}{summed (default) or mean frequency}
+
+\item{progressbar}{show progress bar TRUE or FALSE}
 }
 \value{
 list of frequencies

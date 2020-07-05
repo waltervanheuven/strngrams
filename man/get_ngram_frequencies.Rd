@@ -8,7 +8,8 @@ get_ngram_frequencies(
   word_list,
   freq_list,
   type = "bigram",
-  position_specific = TRUE
+  position_specific = TRUE,
+  progressbar = TRUE
 )
 }
 \arguments{
@@ -19,12 +20,21 @@ get_ngram_frequencies(
 \item{type}{string "monogram", "bigram" (default), "trigram", or number of characters of ngram}
 
 \item{position_specific}{ngram is position specific or not: TRUE (default) or FALSE}
+
+\item{progressbar}{show progress bar TRUE or FALSE}
 }
 \value{
 data frame with ngrams and their frequencies
 }
 \description{
 `get_ngram_frequencies` returns the ngrams found in a lexicon and their frequencies
+}
+\examples{
+\dontrun{
+the_file <- system.file("extdata", "test-lexicon.txt", package = "strngrams")
+db <- read.table(the_file, header = TRUE, fileEncoding = "UTF-8")
+get_ngram_frequencies(db$word, db$frequency, type = "bigram", position_specific = TRUE)
+}
 }
 \author{
 Walter van Heuven

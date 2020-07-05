@@ -18,8 +18,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' str_bigram("DREAM")
-#' str_bigram("DREAM", "all")
+#' # only adjacent bigrams
+#' bigram("dream")
+#' # all possible open bigrams
+#' bigram("dream", "all")
+#' # max two letters between letters of the open bigram
+#' bigram("dream", "open", 3)
 #' }
 #' @export
 bigrams <- function(the_str, type = "adjacent", max_distance = -1) {
@@ -158,11 +162,20 @@ ngrams <- function(the_str, type = "bigram", frequency = 1) {
 #' @param freq_list list of frequencies for each word
 #' @param type string "monogram", "bigram" (default), "trigram", or number of characters of ngram
 #' @param position_specific ngram is position specific or not: TRUE (default) or FALSE
+#' @param progressbar show progress bar TRUE or FALSE
 #'
 #' @return data frame with ngrams and their frequencies
 #'
+#' @examples
+#' \dontrun{
+#' the_file <- system.file("extdata", "test-lexicon.txt", package = "strngrams")
+#' db <- read.table(the_file, header = TRUE, fileEncoding = "UTF-8")
+#' get_ngram_frequencies(db$word, db$frequency, type = "bigram", position_specific = TRUE)
+#' }
 #' @export
-get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", position_specific = TRUE) {
+get_ngram_frequencies <- function(word_list, freq_list, type = "bigram",
+                                  position_specific = TRUE,
+                                  progressbar = TRUE) {
   # check length of each list is the same
   n_words <- length(word_list)
   if (n_words != length(freq_list)) {
@@ -170,7 +183,11 @@ get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", positio
   }
 
   # apply ngram to each word
-  ngram_list <- pbapply::pbmapply(word_list, FUN = ngrams, rep(type, n_words), frequency = freq_list)
+  if (progressbar == TRUE) {
+    ngram_list <- pbapply::pbmapply(word_list, FUN = ngrams, rep(type, n_words), frequency = freq_list)
+  } else {
+    ngram_list <- mapply(word_list, FUN = ngrams, rep(type, n_words), frequency = freq_list)
+  }
 
   # create data.frame
   s <- as.character(unlist(ngram_list["ngram",]))
@@ -212,7 +229,10 @@ get_ngram_frequencies <- function(word_list, freq_list, type = "bigram", positio
 #' @return summed ngram frequency
 #'
 #' @export
-ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed") {
+ngram_frequency_str <- function(the_str, ngram_table, type = "bigram",
+                                position_specific = TRUE,
+                                frequency = "token",
+                                func = "summed") {
   if (is.null(ngram_table)) {
     stop("ngram_table missing")
   }
@@ -291,24 +311,39 @@ ngram_frequency_str <- function(the_str, ngram_table, type = "bigram", position_
 #' @param position_specific TRUE or FALSE
 #' @param frequency type or token
 #' @param func summed (default) or mean frequency
+#' @param progressbar show progress bar TRUE or FALSE
 #'
 #' @return list of frequencies
 #'
 #' @export
-ngram_frequency <- function(word_list, ngram_table, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed") {
+ngram_frequency <- function(word_list, ngram_table, type = "bigram",
+                            position_specific = TRUE,
+                            frequency = "token",
+                            func = "summed",
+                            progressbar = TRUE) {
   if (is.null(ngram_table)) {
     stop("ngram_table missing")
   }
   f <- c()
   word_list <- as.character(word_list)
 
-  f <- as.numeric(pbapply::pblapply(word_list,
-                         ngram_frequency_str,
-                         ngram_table = ngram_table,
-                         type = type,
-                         position_specific = position_specific,
-                         frequency = frequency,
-                         func = func))
+  if (progressbar == TRUE) {
+    f <- as.numeric(pbapply::pblapply(word_list,
+                           ngram_frequency_str,
+                           ngram_table = ngram_table,
+                           type = type,
+                           position_specific = position_specific,
+                           frequency = frequency,
+                           func = func))
+  } else {
+    f <- as.numeric(lapply(word_list,
+                                      ngram_frequency_str,
+                                      ngram_table = ngram_table,
+                                      type = type,
+                                      position_specific = position_specific,
+                                      frequency = frequency,
+                                      func = func))
+  }
 
   return(f)
 }
@@ -320,20 +355,38 @@ ngram_frequency <- function(word_list, ngram_table, type = "bigram", position_sp
 #' @description `anagrams` returns all possible anagrams of the string
 #'
 #' @param the_str string
-#'
+#' @param wordList list of words
+#' @param progressbar show progress bar TRUE or FALSE
 #' @return vector of all possible anagrams
 #'
 #' @examples
 #' \dontrun{
-#' anagrams("DREAM")
+#' # return all anagrams that are words
+#' anagrams("dream", vwr::english.words)
+#'
+#' # return all anagram letter strings, if none is found return NULL
+#' anagrams("dream")
 #' }
 #' @export
-anagrams <- function(the_str) {
+anagrams <- function(the_str, wordList = NULL, progressbar = TRUE) {
   letters <- unlist(strsplit(the_str,""))
 
   the_permutations <- combinat::permn(letters)
-  the_list <- unlist(lapply(the_permutations, FUN=paste, sep="",collapse=""))
+  if (progressbar == TRUE) {
+    the_list <- unlist(pbapply::pblapply(the_permutations, FUN=paste, sep="",collapse=""))
+  } else {
+    the_list <- unlist(lapply(the_permutations, FUN=paste, sep="",collapse=""))
+  }
   the_list <- unique(the_list)
+
+  # filter to leave only anagrams that are words
+  if (!is.null(wordList)) {
+    the_list <- the_list[the_list %in% wordList]
+  }
+  the_list <- the_list[!(the_list %in% c(the_str))]
+  if (length(the_list)==0) {
+    the_list = NULL
+  }
 
   return(the_list)
 }

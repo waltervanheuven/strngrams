@@ -28,8 +28,12 @@ Either all possible bigrams or only adjacent bigrams or open bigrams are returne
 }
 \examples{
 \dontrun{
-str_bigram("DREAM")
-str_bigram("DREAM", "all")
+# only adjacent bigrams
+bigram("dream")
+# all possible open bigrams
+bigram("dream", "all")
+# max two letters between letters of the open bigram
+bigram("dream", "open", 3)
 }
 }
 \author{
