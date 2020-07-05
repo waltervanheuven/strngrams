@@ -19,6 +19,9 @@ vector of all possible anagrams
 \description{
 `anagrams` returns all possible anagrams of the string
 }
+\details{
+Note that this function uses a brute force method so use only short strings (<12)
+}
 \examples{
 \dontrun{
 # return all anagrams that are words
