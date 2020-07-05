@@ -1,7 +1,8 @@
 
 ## strngrams 0.3.4
 
-- Anagrams function now can return only strings that are words.
+- Anagrams function returns only strings that are words if wordList is provided.
+- Anagrams function can handle strings that contain a space.
 - Progress bars can be turned off.
 
 ## strngrams 0.3.3

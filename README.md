@@ -64,7 +64,10 @@ anagrams("dream", vwr::english.words)
 # [1] "armed"
 
 anagrams("silence", vwr::english.words)
-#[1] "selenic" "license"
+# [1] "selenic" "license"
+
+anagrams("sil ence", vwr::english.words)
+# [1] "silence" "selenic" "license"
 ```
 
 ### Bigram frequencies of words in lexicon

@@ -354,6 +354,7 @@ ngram_frequency <- function(word_list, ngram_table, type = "bigram",
 #'
 #' @description `anagrams` returns all possible anagrams of the string
 #'
+#' @details Note that this function uses a brute force method so use only short strings (<12)
 #' @param the_str string
 #' @param wordList list of words
 #' @param progressbar show progress bar TRUE or FALSE
@@ -371,11 +372,15 @@ ngram_frequency <- function(word_list, ngram_table, type = "bigram",
 anagrams <- function(the_str, wordList = NULL, progressbar = TRUE) {
   letters <- unlist(strsplit(the_str,""))
 
+  # create all possible permutations!
+  # avoid using long strings as the number of permutations explode, n!
   the_permutations <- combinat::permn(letters)
+
   if (progressbar == TRUE) {
     the_list <- unlist(pbapply::pblapply(the_permutations, FUN=paste, sep="",collapse=""))
+    the_list <- unlist(pbapply::pblapply(the_list, FUN=stringr::str_trim))
   } else {
-    the_list <- unlist(lapply(the_permutations, FUN=paste, sep="",collapse=""))
+      the_list <- unlist(lapply(the_permutations, FUN=paste, sep="",collapse=""))
   }
   the_list <- unique(the_list)
 
@@ -383,7 +388,7 @@ anagrams <- function(the_str, wordList = NULL, progressbar = TRUE) {
   if (!is.null(wordList)) {
     the_list <- the_list[the_list %in% wordList]
   }
-  the_list <- the_list[!(the_list %in% c(the_str))]
+  the_list <- the_list[!(the_list %in% unlist(strsplit(the_str, " ")))]
   if (length(the_list)==0) {
     the_list = NULL
   }
