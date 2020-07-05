@@ -370,30 +370,56 @@ ngram_frequency <- function(word_list, ngram_table, type = "bigram",
 #' }
 #' @export
 anagrams <- function(the_str, wordList = NULL, progressbar = TRUE) {
-  letters <- unlist(strsplit(the_str,""))
+  the_list <- c()
+  if (is.null(wordList)) {
+    # create all possible permutations of the_str!
+    # no check if these are words
+    # avoid using long strings as the number of permutations explode, n!
+    str_letters <- unlist(strsplit(the_str,""))
+    the_permutations <- combinat::permn(str_letters)
+    the_list <- unlist(lapply(the_permutations, FUN=paste, sep="",collapse=""))
+    the_list <- unique(the_list)
 
-  # create all possible permutations!
-  # avoid using long strings as the number of permutations explode, n!
-  the_permutations <- combinat::permn(letters)
-
-  if (progressbar == TRUE) {
-    the_list <- unlist(pbapply::pblapply(the_permutations, FUN=paste, sep="",collapse=""))
-    the_list <- unlist(pbapply::pblapply(the_list, FUN=stringr::str_trim))
   } else {
-      the_list <- unlist(lapply(the_permutations, FUN=paste, sep="",collapse=""))
+    # use wordList to find word anagrams
+    if (progressbar == TRUE) {
+      the_list <- wordList[unlist(pbapply::pblapply(wordList, are_anagrams, w2 = the_str))]
+    } else {
+      the_list <- wordList[unlist(lapply(wordList, are_anagrams, w2 = the_str))]
+    }
   }
-  the_list <- unique(the_list)
-
-  # filter to leave only anagrams that are words
-  if (!is.null(wordList)) {
-    the_list <- the_list[the_list %in% wordList]
-  }
-  the_list <- the_list[!(the_list %in% unlist(strsplit(the_str, " ")))]
-  if (length(the_list)==0) {
-    the_list = NULL
-  }
-
   return(the_list)
+}
+
+#' @name are_anagrams
+#' @title returns TRUE is both strings are anagrams and not the same
+#' @author Walter van Heuven
+#'
+#' @param w1 string 1
+#' @param w2 string 2
+#'
+#' @return TRUE or FALSE
+#'
+#' @export
+are_anagrams <- function(w1, w2) {
+  if (stringr::str_length(w1) == stringr::str_length(w2)) {
+    if (w1 != w2) {
+      w1_letters <- unlist(strsplit(w1,""))
+      w2_letters <- unlist(strsplit(w2,""))
+      for (l in w1_letters) {
+        w2_letters <- w2_letters[-match(l, w2_letters)]
+      }
+      if (length(w2_letters) == 0) {
+        return(TRUE)
+      } else {
+        return(FALSE)
+      }
+    } else {
+      return(FALSE)
+    }
+  } else {
+    return(FALSE)
+  }
 }
 
 #' @name sbf_rank
