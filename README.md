@@ -65,9 +65,6 @@ anagrams("dream", vwr::english.words)
 
 anagrams("silence", vwr::english.words)
 # [1] "selenic" "license"
-
-anagrams("sil ence", vwr::english.words)
-# [1] "silence" "selenic" "license"
 ```
 
 ### Bigram frequencies of words in lexicon
@@ -112,23 +109,25 @@ print(df_bigrams)
 #9      nk   3              1              10
 #10     op   3              1               6
 
-# calculate summed positional bigram frequencies and add those to db with words
-db$sum.bf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed")
+# summed bigram frequency (SBF)
+#
+# type base
+db$sbf.type <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "type", func = "summed")
 
-# calculate mean positional bigram frequencies and add those to db with words
-db$mean.bf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "mean")
+# token  based
+db$sbf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "summed")
 
+# mean bigram frequency
+#
 # type
-db$sum.bf.type <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "type", func = "summed")
-
 db$mean.bf.type <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "type", func = "mean")
 
-# note that functions above can take a long time when using a large lexicon
+db$mean.bf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "mean")
 
 # show lexicon with type and token bigram frequencies
 print(db)
 
-#  word frequency sum.bf.token mean.bf.token sum.bf.type mean.bf.type
+#  word frequency sbf.type mean.bf.token sum.bf.type mean.bf.type
 #1 bank        10           38     12.666667           5     1.666667
 #2 bobo         8            8      2.666667           3     1.000000
 #3 bald         2           22      7.333333           5     1.666667
