@@ -394,7 +394,7 @@ anagrams <- function(the_str, wordList = NULL, progressbar = TRUE) {
 }
 
 #' @name are_anagrams
-#' @title returns TRUE is both strings are anagrams and not the same
+#' @title returns TRUE if both strings are anagrams and not the same
 #' @author Walter van Heuven
 #'
 #' @param w1 string 1
