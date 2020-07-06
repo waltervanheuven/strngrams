@@ -2,7 +2,7 @@
 % Please edit documentation in R/strngrams.R
 \name{are_anagrams}
 \alias{are_anagrams}
-\title{returns TRUE is both strings are anagrams and not the same}
+\title{returns TRUE if both strings are anagrams and not the same}
 \usage{
 are_anagrams(w1, w2)
 }
@@ -15,7 +15,7 @@ are_anagrams(w1, w2)
 TRUE or FALSE
 }
 \description{
-returns TRUE is both strings are anagrams and not the same
+returns TRUE if both strings are anagrams and not the same
 }
 \author{
 Walter van Heuven

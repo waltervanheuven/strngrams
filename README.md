@@ -60,6 +60,8 @@ ngrams("dream", 4)
 ### Anagrams
 
 ```R
+library(vwr)
+
 anagrams("dream", vwr::english.words)
 # [1] "armed"
 
@@ -82,10 +84,12 @@ bald  2
 baop  6
 ```
 
-Script example to load lexicon, bigram frequencies , and saving file.
+Script example to load lexicon, calculate bigram frequencies , and save results file.
 
 ```R
 # test lexicon with 4 words
+#
+
 the_file <- system.file("extdata", "test-lexicon.txt", package = "strngrams")
 db <- read.table(the_file, header = TRUE, fileEncoding = "UTF-8")
 print(db)
@@ -120,20 +124,39 @@ db$sbf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_s
 # mean bigram frequency
 #
 # type
-db$mean.bf.type <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "type", func = "mean")
+db$mbf.type <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "type", func = "mean")
 
-db$mean.bf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "mean")
+db$mbf.token <- ngram_frequency(db$word, df_bigrams, type = "bigram", position_specific = TRUE, frequency = "token", func = "mean")
 
 # show lexicon with type and token bigram frequencies
 print(db)
 
-#  word frequency sbf.type mean.bf.token sum.bf.type mean.bf.type
-#1 bank        10           38     12.666667           5     1.666667
-#2 bobo         8            8      2.666667           3     1.000000
-#3 bald         2           22      7.333333           5     1.666667
-#4 baop         6           30     10.000000           5     1.666667
+#  word frequency sbf.type sbf.token mbf.type mbf.token
+#1 bank        10        5        38 1.666667 12.666667
+#2 bobo         8        3         8 1.000000  2.666667
+#3 bald         2        5        22 1.666667  7.333333
+#4 baop         6        5        30 1.666667 10.000000
 
 # save to tab-delimited file
 write.table(db, col.names = T, row.names = F, file="test-lexicon_BF.txt", quote = FALSE, fileEncoding="UTF-8", sep="\t")
 
 ```
+
+Summed bigram frequency (SBF) of 66,330 English words
+
+```R
+library(vwr)
+
+# 66,330 English words from the CELEX lexical database
+db <- data.frame(word = vwr::english.words)
+
+# get bigrams, ignore token frequency (token frequency = 1 for all words)
+df_bigrams <- get_ngram_frequencies(db$word, rep(1,nrow(db)), type="bigram", position_specific=TRUE)
+
+# type based SBF of each word
+db$sbf.type <- ngram_frequency(db$word, df_bigrams, type="bigram", position_specific=TRUE, frequency="type", func="summed")
+
+# top10 words based on SBF
+head(db[order(-db$sbf.type),], n=10)
+```
+
