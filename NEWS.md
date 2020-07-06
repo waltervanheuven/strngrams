@@ -1,4 +1,8 @@
 
+## strngrams 0.3.6
+- Corrected bug in sbf_rank.
+- Included additional examples in the README.
+
 ## strngrams 0.3.5
 - Improved anagrams function.
 

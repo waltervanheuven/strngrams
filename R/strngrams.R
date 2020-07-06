@@ -460,7 +460,7 @@ sbf_rank <- function(the_str, bigram_table, top12 = FALSE, method = "Novick") {
 
            # summed bigram frequency of the_str
            #sbf_the_str <- str_summed_ngram(the_str, bigram_table, type = "bigram", frequency = "type")
-           sbf_str_str <- ngram_frequency_str(the_str, bigram_table, type = "bigram", frequency = "type")
+           sbf_the_str <- ngram_frequency_str(the_str, bigram_table, type = "bigram", frequency = "type")
 
            # data.frame with anagrams
            df <- data.frame(anagrams = the_anagrams, sbf = 0)
